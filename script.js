@@ -24,7 +24,9 @@ link.addEventListener('click', countClick);
 
 
 //document.addEventListener('keydown', buttonClick); // prendo tutti i tasti cliccati.
-document.addEventListener('keydown', changeBackground);
+// document.addEventListener('keydown', changeBackground);
+// document.addEventListener('keydown', onKeyDown);
+document.addEventListener('keydown', realTimeSearch);
 
 
 function buttonClick(string) {
@@ -50,4 +52,61 @@ function changeBackground(event) {
         event.preventDefault();
         document.body.style.backgroundColor = '#' + number + number + number + number + number + number;
     }
+}
+
+//----------------------------------------------------------------------------------//
+
+
+// setTimeout(() => { // quello dentro viene eseguito dopo il tempo definito, una volta sola.
+//    console.log('pippo'); 
+// }, 10000); // il tempo è sempre in millisecondi.
+
+
+// let intervalCounter = 0;
+// const interval = setInterval(() => { // quello dentro viene eseguito dopo il tempo definito, ripetuto.
+//     console.log(intervalCounter);
+//     if (intervalCounter === 10) {
+//         clearInterval(interval); // stoppo l'interval.
+//     }
+//     intervalCounter++;
+// }, 1000);
+
+
+const div = document.getElementById('mouse-div-2');
+
+// div.addEventListener('mouseenter', onMouseEnter);
+// div.addEventListener('mouseleave', onMouseLeave);
+
+div.addEventListener('mousemove', onMouseOver);
+
+function onMouseEnter() {
+    console.log('sono entrato');
+}
+
+function onMouseLeave() {
+    console.log('sono uscito');
+}
+
+function onMouseOver() {
+    console.log('sono sopra');
+}
+
+
+let selectedKey = '';
+function onKeyDown(event) {
+    if (event.key !== selectedKey) {
+        console.log('tasto premuto ' + event.key);
+        selectedKey = event.key;
+    }
+}
+
+
+let searchTimeout;
+function realTimeSearch(event) {
+    if (searchTimeout) {
+        clearTimeout(searchTimeout);
+    }
+    searchTimeout = setTimeout(() => {
+        console.log('sto cercando');
+    }, 1000);
 }
